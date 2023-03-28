@@ -1,4 +1,4 @@
 # TextQuery
 
 ####  Elegantly implement search words in articles using dynamic memory.
-####  Supports searching logic (~ | & ||) at the same time.
+####  Only support search single word at present.
