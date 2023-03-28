@@ -4,11 +4,12 @@
 
 using namespace std;
 
-const string WORD_TO_QUERY = "git"; 
 
 Query::QueryResult runQueries(ifstream &infile) {
     Query::TextQuery tq(infile);
-    return tq.query(WORD_TO_QUERY);
+    // 不存在"you"，且存在"You"或者"git"
+    Query::Query q = ~Query::Query("you") & (Query::Query("git") | Query::Query("You"));
+    return q.eval(tq);
 };
 
 int main(int argc, char** argv) {

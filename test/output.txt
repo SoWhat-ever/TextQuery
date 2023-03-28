@@ -1,9 +1,12 @@
-git occurs 8 time 
+(~(you) & (git | You)) occurs 11 time 
 	(line 4) $ git clone --bare https://github.com/cmu-db/bustub.git bustub-public
 	(line 8) $ git push https://github.com/student/bustub-private.git master
 	(line 10) $ git push git@github.com:student/bustub-private.git master
+	(line 11) This copies everything in the public BusTub repository to your own private repository. You can now delete your local clone of the public repository:
 	(line 16) $ git clone https://github.com/student/bustub-private.git
 	(line 18) $ git clone git@github.com:student/bustub-private.git
 	(line 20) $ git remote add public https://github.com/cmu-db/bustub.git
+	(line 21) You can verify that the remote was added with the following command:
 	(line 22) $ git remote -v
+	(line 27) You can now pull in changes from the public BusTub repository as needed with:
 	(line 28) $ git pull public master
