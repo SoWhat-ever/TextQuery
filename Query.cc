@@ -42,4 +42,37 @@ QueryResult TextQuery::query(const std::string& sought) const{
         return QueryResult(sought, loc->second, file);
 }
 
+QueryResult NotQuery::eval(const TextQuery &tq) const {
+    QueryResult result = query.eval(tq);
+    auto ret_lines = std::make_shared<std::set<line_no>>();
+    auto beg = result.get_lines_begin(), end = result.get_lines_end();
+    auto sz = result.get_file()->size();
+    for(size_t i = 0; i != sz; i++){
+        if(beg == end || *beg != i)
+            ret_lines->insert(i);
+        else if(beg != end)
+            ++beg;
+    }
+    return QueryResult(rep(), ret_lines, result.get_file());
+};
+
+
+QueryResult AndQuery::eval(const TextQuery &tq) const {
+    QueryResult left = lhs.eval(tq), right = rhs.eval(tq);
+    auto ret_lines = std::make_shared<std::set<line_no>>();
+    // 标注库算法set_intersection，将两个范围的交集写入一个目的迭代器中
+    std::set_intersection(left.get_lines_begin(), left.get_lines_end(), 
+        right.get_lines_begin(), right.get_lines_end(), std::inserter(*ret_lines, ret_lines->begin()));
+    return QueryResult(rep(), ret_lines, left.get_file());
+};
+
+QueryResult OrQuery::eval(const TextQuery &tq) const {
+    QueryResult left = lhs.eval(tq), right = rhs.eval(tq);
+    // 得到左侧行号
+    auto ret_lines = std::make_shared<std::set<line_no>>(left.get_lines_begin(), left.get_lines_end());
+    // 插入右侧行号
+    ret_lines->insert(right.get_lines_begin(), right.get_lines_end());
+    return QueryResult(rep(), ret_lines, left.get_file());
+};
+
 }
