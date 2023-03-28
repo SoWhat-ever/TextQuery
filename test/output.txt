@@ -1,0 +1,9 @@
+git occurs 8 time 
+	(line 4) $ git clone --bare https://github.com/cmu-db/bustub.git bustub-public
+	(line 8) $ git push https://github.com/student/bustub-private.git master
+	(line 10) $ git push git@github.com:student/bustub-private.git master
+	(line 16) $ git clone https://github.com/student/bustub-private.git
+	(line 18) $ git clone git@github.com:student/bustub-private.git
+	(line 20) $ git remote add public https://github.com/cmu-db/bustub.git
+	(line 22) $ git remote -v
+	(line 28) $ git pull public master
