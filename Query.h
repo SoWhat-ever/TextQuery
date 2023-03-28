@@ -44,6 +44,21 @@ private:
 
 };
 
+// class Query_base {
+//     friend class Query;
+// protected:
+//     virtual ~Query_base() = default;
+// private:
+//     virtual QueryResult eval(const TextQuery& ) const = 0;
+//     virtual std::string rep() const = 0;
+// };
+
+// class WordQuery : public Query_base {
+//     // QueryResult eval(const TextQuery& t) const { return t.q}
+//     std::string rep() const { return query_word; }
+//     std::string query_word;
+// };
+
 
 }
 #endif
